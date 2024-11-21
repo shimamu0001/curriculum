@@ -1,0 +1,48 @@
+
+問１
+Switch３
+
+
+問２
+ルートポート
+　Switch１F0/2
+　Switch２F0/1
+　Switch４E0/2
+
+指定ポート
+　Switch１F0/1
+　Switch３E0/1
+　Switch３E0/2
+　Switch４E0/1
+
+ブロッキングポート
+　Switch２F0/2
+
+ルートポートの求め方　
+Switch１（F0/1）とSwitch２（F0/1）間はファストイーサネットのため、通信速度は100Mbps。よってルートパスコストは19。①
+Switch１（F0/2）とSwitch３（E0/1）間はイーサネットのため、通信速度は10Mbps。よってルートパスコストは100。②
+Switch２（F0/1）とSwitch４（E0/1）間はイーサネットのため、通信速度は10Mbps。よってルートパスコストは100。③
+Switch３（E0/2）とSwitch４（E0/2）間はイーサネットのため、通信速度は10Mbps。よってルートパスコストは100。④
+
+Switch1からSwitch3へのルートは
+Switch１→Switch3（②＝100）と
+Switch１→Switch2→Switch4→Switch3（①＋③＋④＝219）
+ルートパスコストの小さいF0/2がルートポートになる。
+
+Switch2からSwitch3へのルートは
+Switch2→Switch１→Switch3（①＋②＝119）と
+Switch2→Switch4→Switch3（③＋④＝200）
+ルートパスコストの小さいF0/1がルートポートになる。
+
+Switch4からSwitch3へのルートは
+Switch4→Switch3（④＝100）と
+Switch4→Switch2→Switch1→Switch3（③＋①＋②＝219）
+ルートパスコストの小さいE0/2がルートポートになる。
+
+指定ポートの求め方
+ルートブリッジの全てのポートは指定ポートになるため、Switch３E0/1とSwitch３E0/2が指定ポートになる。
+ルートポートに指定された向かい側のポートは指定ポートになるため、Switch１F0/1が指定ポートになる。
+Switch２とSwitch４間のポートに役割はない場合ブリッジIDの小さいほうを指定ポートにするため、Switch４のE0/1が指定ポートになる。
+
+ブロッキングポートの求め方
+ルートポートにも指定ポートにも選ばれなかったSwitch２F0/2がブロッキングポートになる。
